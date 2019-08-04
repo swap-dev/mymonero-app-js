@@ -1262,7 +1262,7 @@ class Wallet extends EventEmitter
 			3: "This wallet must first be imported.",
 			4: "Please specify the recipient of this transfer.",
 			5: "Couldn't resolve this OpenAlias address.",
-			6: "Couldn't validate destination Monero address.",
+			6: "Couldn't validate destination Swap address.",
 			7: "Please enter a valid payment ID.",
 			8: "Couldn't construct integrated address with short payment ID.",
 			9: "The amount you've entered is too low.",

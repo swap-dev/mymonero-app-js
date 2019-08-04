@@ -208,7 +208,7 @@ class AddContactView extends ContactFormView
 				address__decode_result = self.context.monero_utils.decode_address(address, self.context.nettype)
 			} catch (e) {
 				__reEnableForm()
-				self.validationMessageLayer.SetValidationError("Please enter a valid Monero address") // not using the error here cause it can be pretty unhelpful to the lay user
+				self.validationMessageLayer.SetValidationError("Please enter a valid Swap address") // not using the error here cause it can be pretty unhelpful to the lay user
 				return
 			}
 			const integratedAddress_paymentId = address__decode_result.intPaymentId
@@ -370,16 +370,16 @@ class AddContactView extends ContactFormView
 				//
 				const code = jsQR(imageData.data, imageData.width, imageData.height)
 				if (!code || !code.location) {
-					self.validationMessageLayer.SetValidationError("MyMonero was unable to find a QR code in that image.")
+					self.validationMessageLayer.SetValidationError("MySwap was unable to find a QR code in that image.")
 					return
 				}
 				const stringData = code.data
 				if (!stringData) {
-					self.validationMessageLayer.SetValidationError("MyMonero was unable to decode a QR code from that image.")
+					self.validationMessageLayer.SetValidationError("MySwap was unable to decode a QR code from that image.")
 					return
 				}
 				if (typeof stringData !== 'string') {
-					self.validationMessageLayer.SetValidationError("MyMonero was able to decode QR code but got unrecognized result.")
+					self.validationMessageLayer.SetValidationError("MySwap was able to decode QR code but got unrecognized result.")
 					return
 				}
 				const possibleUriString = stringData

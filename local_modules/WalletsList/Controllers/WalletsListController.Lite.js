@@ -41,7 +41,7 @@ class WalletsListController extends WalletsListController_Base
 	//
 	LiteAppWalletName()
 	{
-		return "My Monero Wallet"
+		return "My Swap Wallet"
 	}
 	LiteAppWalletSwatchColor() // possibly change this to random color at some point
 	{

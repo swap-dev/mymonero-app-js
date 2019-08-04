@@ -28,8 +28,8 @@
 //
 "use strict";
 //
-const coinSymbol = "XMR";
-const coinUriPrefix = "monero:";
+const coinSymbol = "XWP";
+const coinUriPrefix = "swap:";
 //
 const URITypes = {
 	addressAsFirstPathComponent: 1,
@@ -113,7 +113,7 @@ function New_ParsedPayload_FromPossibleRequestURIString(string, nettype, monero_
 				nettype
 			);
 		} catch (e) {
-			throw "No Monero request info";
+			throw "No Swap request info";
 		}
 		// then it looks like a monero address
 		return {
@@ -124,7 +124,7 @@ function New_ParsedPayload_FromPossibleRequestURIString(string, nettype, monero_
 	const url = new URL(uriString);
 	const protocol = url.protocol;
 	if (protocol !== coinUriPrefix) {
-		throw "Request URI has non-Monero protocol";
+		throw "Request URI has non-Swap protocol";
 	}
 	var target_address = url.pathname; // var instead of const as have to finalize it
 	// it seems that if the URL has // in it, pathname will be empty, but host will contain the address instead

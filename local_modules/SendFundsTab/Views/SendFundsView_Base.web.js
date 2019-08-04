@@ -232,7 +232,7 @@ class SendFundsView extends View
 		{
 			const labelLayer = commonComponents_forms.New_fieldTitle_labelLayer("FROM", self.context)
 			{
-				const tooltipText = `Monero makes transactions<br/>with your "available outputs",<br/>so part of your balance will<br/>be briefly locked and then<br/>returned as change.`
+				const tooltipText = `Swap makes transactions<br/>with your "available outputs",<br/>so part of your balance will<br/>be briefly locked and then<br/>returned as change.`
 				const view = commonComponents_tooltips.New_TooltipSpawningButtonView(tooltipText, self.context)
 				const layer = view.layer
 				labelLayer.appendChild(layer) // we can append straight to labelLayer as we don't ever change its innerHTML
@@ -322,7 +322,7 @@ class SendFundsView extends View
 			breakingDiv.appendChild(layer)
 		}
 		{
-			const tooltipText = "Based on Monero network<br/>fee estimate (not final).<br/><br/>MyMonero does not charge<br/>a transfer service fee."
+			const tooltipText = "Based on Swap network<br/>fee estimate (not final).<br/><br/>MySwap does not charge<br/>a transfer service fee."
 			const view = commonComponents_tooltips.New_TooltipSpawningButtonView(tooltipText, self.context)
 			const layer = view.layer
 			breakingDiv.appendChild(layer)
@@ -347,7 +347,7 @@ class SendFundsView extends View
 		const labelLayer = commonComponents_forms.New_fieldTitle_labelLayer("TO", self.context)
 		labelLayer.style.marginTop = "17px" // to square with MEMO field on Send Funds
 		{
-			const tooltipText = `Drag &amp; drop QR codes<br/>to auto-fill.<br/><br/>Please double-check<br/>your recipient info as<br/>Monero transfers are<br/>not yet&nbsp;reversible.`
+			const tooltipText = `Drag &amp; drop QR codes<br/>to auto-fill.<br/><br/>Please double-check<br/>your recipient info as<br/>Swap transfers are<br/>not yet&nbsp;reversible.`
 			const view = commonComponents_tooltips.New_TooltipSpawningButtonView(tooltipText, self.context)
 			const layer = view.layer
 			labelLayer.appendChild(layer) // we can append straight to labelLayer as we don't ever change its innerHTML
@@ -385,7 +385,7 @@ class SendFundsView extends View
 			div.appendChild(fieldContainerLayer)
 			fieldContainerLayer.style.display = "none" // initial state
 			{
-				const labelLayer = commonComponents_forms.New_fieldTitle_labelLayer("MONERO ADDRESS", self.context)
+				const labelLayer = commonComponents_forms.New_fieldTitle_labelLayer("SWAP ADDRESS", self.context)
 				labelLayer.style.marginTop = "12px" // instead of 15
 				fieldContainerLayer.appendChild(labelLayer)
 				//
@@ -506,7 +506,7 @@ class SendFundsView extends View
 			const labelLayer = commonComponents_forms.New_fieldTitle_labelLayer("PRIORITY", self.context)
 			labelLayer.style.marginTop = "4px"
 			{
-				const tooltipText = `You can pay the Monero<br/>network a higher fee to<br/>have your transfers<br/>confirmed faster.`
+				const tooltipText = `You can pay the Swap<br/>network a higher fee to<br/>have your transfers<br/>confirmed faster.`
 				const view = commonComponents_tooltips.New_TooltipSpawningButtonView(tooltipText, self.context)
 				const layer = view.layer
 				labelLayer.appendChild(layer) // we can append straight to labelLayer as we don't ever change its innerHTML
@@ -711,7 +711,7 @@ class SendFundsView extends View
 			div.style.fontWeight = "300"
 			div.style.webkitFontSmoothing = "subpixel-antialiased"
 			//
-			div.innerHTML = "Drag and drop a<br/>Monero Request Code "
+			div.innerHTML = "Drag and drop a<br/>Swap Request Code "
 			self.qrCodeInputs_contentView.layer.appendChild(div)
 		}
 		self.addSubview(view)
@@ -927,7 +927,7 @@ class SendFundsView extends View
 	//
 	Navigation_Title()
 	{
-		return "Send Monero"
+		return "Send Swap"
 	}
 	Navigation_New_RightBarButtonView()
 	{
@@ -1860,7 +1860,7 @@ class SendFundsView extends View
 			try {
 				address__decode_result = self.context.monero_utils.decode_address(enteredPossibleAddress, self.context.nettype)
 			} catch (e) {
-				console.warn("Couldn't decode as a Monero address.", e)
+				console.warn("Couldn't decode as a Swap address.", e)
 				self.isResolvingSendTarget = false
 				self.set_isSubmittable_needsUpdate()
 				return // just return silently
@@ -1987,16 +1987,16 @@ class SendFundsView extends View
 				//
 				const code = jsQR(imageData.data, imageData.width, imageData.height)
 				if (!code || !code.location) {
-					self.validationMessageLayer.SetValidationError("MyMonero was unable to find a QR code in that image.")
+					self.validationMessageLayer.SetValidationError("MySwap was unable to find a QR code in that image.")
 					return
 				}
 				const stringData = code.data
 				if (!stringData) {
-					self.validationMessageLayer.SetValidationError("MyMonero was unable to decode a QR code from that image.")
+					self.validationMessageLayer.SetValidationError("MySwap was unable to decode a QR code from that image.")
 					return
 				}
 				if (typeof stringData !== 'string') {
-					self.validationMessageLayer.SetValidationError("MyMonero was able to decode QR code but got unrecognized result.")
+					self.validationMessageLayer.SetValidationError("MySwap was able to decode QR code but got unrecognized result.")
 					return
 				}
 				const possibleURIString = stringData
@@ -2155,7 +2155,7 @@ class SendFundsView extends View
 		}
 		// ^ so we don't get torn down while dialog open
 		self.context.filesystemUI.PresentDialogToOpenOneImageFile(
-			"Open Monero Request",
+			"Open Swap Request",
 			function(err, absoluteFilePath)
 			{
 				self.context.userIdleInWindowController.ReEnable_userIdle()					

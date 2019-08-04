@@ -112,16 +112,16 @@ class FundsRequestQRDisplayView extends View
 		{
 			let payment_id = self.initializing__fundsRequest.payment_id
 			let amount = self.initializing__fundsRequest.amount
-			let amountCcySymbol = self.initializing__fundsRequest.amountCcySymbol || Currencies.ccySymbolsByCcy.XMR
+			let amountCcySymbol = self.initializing__fundsRequest.amountCcySymbol || Currencies.ccySymbolsByCcy.XWP
 			let to_address = self.initializing__fundsRequest.to_address
 			innerHTML = "Scan this code to send "
 			if (amount) {
 				innerHTML += amount + " " + amountCcySymbol
-				if (amountCcySymbol != Currencies.ccySymbolsByCcy.XMR) {
-					innerHTML += " in Monero"
+				if (amountCcySymbol != Currencies.ccySymbolsByCcy.XWP) {
+					innerHTML += " in Swap"
 				}
 			} else {
-				innerHTML += "Monero"
+				innerHTML += "Swap"
 			}
 			if (payment_id != null && payment_id != "" && typeof payment_id !== "undefined") {
 				innerHTML += " with payment ID " + payment_id
@@ -162,8 +162,8 @@ class FundsRequestQRDisplayView extends View
 					}
 					self.context.filesystemUI.PresentDialogToSaveBase64ImageStringAsImageFile(
 						imgDataURIString,
-						"Save Monero Request",
-						"Monero request",
+						"Save Swap Request",
+						"Swap request",
 						function(err)
 						{
 							if (err) {

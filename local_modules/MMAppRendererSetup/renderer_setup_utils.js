@@ -78,7 +78,7 @@ function HardenRuntime(options)
 	if (isBrowserBuild != true ) {// we used to disable eval for browser builds as well but now use it there when fallback to asmjs is needed
 		window.eval = global.eval = function()
 		{
-			throw new Error("MyMonero does not support window.eval() for security reasons.")
+			throw new Error("MySwap does not support window.eval() for security reasons.")
 		}
 	}
 }
