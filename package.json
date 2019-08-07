@@ -1,10 +1,10 @@
 {
-  "name": "MyMonero",
-  "author": "MyMonero",
-  "description": "The simplest way to use Monero",
-  "version": "1.1.11",
+  "name": "MySwap",
+  "author": "MySwap",
+  "description": "The simplest way to use Swap",
+  "version": "3.0.0rc1",
   "license": "SEE LICENSE IN LICENSE.txt",
-  "repository": "https://github.com/mymonero/mymonero-app-js",
+  "repository": "https://github.com/swap-dev/myswap-app-js",
   "private": false,
   "main": "./local_modules/electron_main/electron_main.js",
   "scripts": {
@@ -67,8 +67,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "mymonero",
-        "repo": "mymonero-app-js"
+        "owner": "myswap",
+        "repo": "myswap-app-js"
       }
     ],
     "mac": {
@@ -100,7 +100,7 @@
       "artifactName": "${productName}-${version}.${ext}"
     },
     "nsisWeb": {
-        "artifactName": "${productName}-${version}.${ext}"
+      "artifactName": "${productName}-${version}.${ext}"
     },
     "linux": {
       "icon": "icon.icns",
@@ -110,9 +110,9 @@
     },
     "protocols": [
       {
-        "name": "Monero Funds Request URL",
+        "name": "Swap Funds Request URL",
         "schemes": [
-          "monero"
+          "swap"
         ]
       }
     ]
