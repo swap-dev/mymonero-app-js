@@ -183,7 +183,7 @@ class WalletDetailsView extends View
 			const displayCcySymbol = amount_displayStringComponents.ccy_str
 			const amt_str = amount_displayStringComponents.amt_str
 			// now check if the ccy is /still/ XMR…
-			if (displayCcySymbol == Currencies.ccySymbolsByCcy.XMR) { 
+			if (displayCcySymbol == Currencies.ccySymbolsByCcy.XWP) { 
 				// NOTE: checking if ccy is XMR again to catch displayCurrencyAmountDouble_orNull=null fallthrough case from alt display ccy 
 				const raw_balanceString = wallet.Balance_FormattedString()
 				const coinUnitPlaces = monero_config.coinUnitPlaces
@@ -794,7 +794,7 @@ class WalletDetailsView extends View
 			self.balanceLabelView.SetBalanceWithWallet(wallet)
 		}
 		// hopefully these will be able to handle small enough values .. maybe switch to BigInt w/o doubles .. but fwiw they are just for display
-		let XMR = Currencies.ccySymbolsByCcy.XMR
+		let XWP = Currencies.ccySymbolsByCcy.XWP
 		const amountPending_JSBigInt = wallet.AmountPending_JSBigInt()
 		const hasPendingAmount = amountPending_JSBigInt.compare(0) > 0
 		const amountLocked_JSBigInt = wallet.locked_balance || new JSBigInt(0)

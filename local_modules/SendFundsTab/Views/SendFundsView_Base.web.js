@@ -298,7 +298,7 @@ class SendFundsView extends View
 		self.effectiveAmountLabelLayer = pkg.effectiveAmountLabelLayer // for configuration
 		{
 			const tooltipText = `Currency selector for<br/>display purposes only.<br/>The app will send ${
-				Currencies.ccySymbolsByCcy.XMR
+				Currencies.ccySymbolsByCcy.XWP
 			}.<br/><br/>Rate providers include<br/>${
 				rateServiceDomainText
 			}.`
@@ -990,7 +990,7 @@ class SendFundsView extends View
 		const xmr_estMaxAmount_str = monero_amount_format_utils.formatMoney(xmr_estMaxAmount)
 		//
 		const displayCcySymbol = self.ccySelectLayer.Component_selected_ccySymbol()
-		if (displayCcySymbol != Currencies.ccySymbolsByCcy.XMR) {
+		if (displayCcySymbol != Currencies.ccySymbolsByCcy.XWP) {
 			const xmr_estMaxAmountDouble = parseFloat(xmr_estMaxAmount_str)
 			let displayCurrencyAmountDouble_orNull = Currencies.displayUnitsRounded_amountInCurrency( 
 				self.context.CcyConversionRates_Controller_shared,
@@ -1031,7 +1031,7 @@ class SendFundsView extends View
 		let finalizable_ccySymbol = displayCcySymbol
 		var finalizable_formattedAmountString = estimatedTotalFee_str;//`${estimatedTotalFee_moneroAmountDouble}`
 		{
-			if (displayCcySymbol != Currencies.ccySymbolsByCcy.XMR) {
+			if (displayCcySymbol != Currencies.ccySymbolsByCcy.XWP) {
 				let displayCurrencyAmountDouble_orNull = Currencies.displayUnitsRounded_amountInCurrency( 
 					self.context.CcyConversionRates_Controller_shared,
 					displayCcySymbol,
@@ -1044,7 +1044,7 @@ class SendFundsView extends View
 						finalizable_ccySymbol
 					)
 				} else {
-					finalizable_ccySymbol = Currencies.ccySymbolsByCcy.XMR // and - special case - revert currency to .xmr while waiting on ccyConversion rate
+					finalizable_ccySymbol = Currencies.ccySymbolsByCcy.XWP // and - special case - revert currency to .xmr while waiting on ccyConversion rate
 				}
 			}
 		}
@@ -1086,8 +1086,8 @@ class SendFundsView extends View
 						rawInput_amount_Number
 					)
 					if (submittableMoneroAmountDouble_orNull == null) { // amt input exists but no converted amt found
-						if (selected_ccySymbol == Currencies.ccySymbolsByCcy.XMR) {
-							throw "null submittableMoneroAmountDouble_orNull while selected_ccySymbol=.XMR"
+						if (selected_ccySymbol == Currencies.ccySymbolsByCcy.XWP) {
+							throw "null submittableMoneroAmountDouble_orNull while selected_ccySymbol=.XWP"
 						}
 						isSubmittable = false // because we must be still loading the rate - so we want to explicitly /disable/ submission
 					}
@@ -1169,8 +1169,8 @@ class SendFundsView extends View
 		if (displayCcySymbol == null) {
 			throw "unexpectedly null displayCcySymbol"
 		}
-		let XMR = Currencies.ccySymbolsByCcy.XMR
-		if (selected_ccySymbol == XMR && displayCcySymbol == XMR) { // special case - no label necessary
+		let XWP = Currencies.ccySymbolsByCcy.XWP
+		if (selected_ccySymbol == XWP && displayCcySymbol == XWP) { // special case - no label necessary
 			__hideEffectiveAmountUI()
 			return
 		}
@@ -1182,17 +1182,17 @@ class SendFundsView extends View
 		)
 		if (xmrAmountDouble_orNull == null) {
 			// but not empty … should have an amount… must be a non-XMR currency
-			if (selected_ccySymbol == XMR) {
-				throw "Unexpected selected_ccySymbol=.XMR"
+			if (selected_ccySymbol == XWP) {
+				throw "Unexpected selected_ccySymbol=.XWP"
 			}
 			__convenience_setLoadingTextAndHideTooltip()
 			return
 		}
 		let xmrAmountDouble = xmrAmountDouble_orNull
 		var finalizable_text
-		if (selected_ccySymbol == XMR) {
-			if (displayCcySymbol == XMR) {
-				throw "Unexpected displayCurrency=.XMR"
+		if (selected_ccySymbol == XWP) {
+			if (displayCcySymbol == XWP) {
+				throw "Unexpected displayCurrency=.XWP"
 			}
 			let displayCurrencyAmountDouble_orNull = Currencies.displayUnitsRounded_amountInCurrency( 
 				self.context.CcyConversionRates_Controller_shared,
@@ -1213,7 +1213,7 @@ class SendFundsView extends View
 			let moneroAmountDouble_atomicPlaces = xmrAmountDouble * Math.pow(10, monero_config.coinUnitPlaces)
 			let moneroAmount = new JSBigInt(moneroAmountDouble_atomicPlaces)
 			let formatted_moneroAmount = monero_amount_format_utils.formatMoney(moneroAmount)
-			finalizable_text = `= ${formatted_moneroAmount} ${Currencies.ccySymbolsByCcy.XMR}`
+			finalizable_text = `= ${formatted_moneroAmount} ${Currencies.ccySymbolsByCcy.XWP}`
 		}
 		let final_text = finalizable_text
 		__setTextOnAmountUI(
@@ -1233,7 +1233,7 @@ class SendFundsView extends View
 		if (self.context.settingsController.hasBooted != true) {
 			throw "_givenBootedSettingsController_setCcySelectLayer_initialValue called but !self.context.settingsController.hasBooted"
 		}
-		const amountCcy = self.context.settingsController.displayCcySymbol || "XMR"
+		const amountCcy = self.context.settingsController.displayCcySymbol || "XWP"
 		self.ccySelectLayer.value = amountCcy
 	}
 	_clearForm()
@@ -1493,15 +1493,15 @@ class SendFundsView extends View
 
 		//
 		// now if using alternate display currency, be sure to ask for terms agreement before doing send
-		if (!sweeping && selected_ccySymbol != Currencies.ccySymbolsByCcy.XMR) {
+		if (!sweeping && selected_ccySymbol != Currencies.ccySymbolsByCcy.XWP) {
 			let hasAgreedToUsageGateTerms = self.context.settingsController.invisible_hasAgreedToTermsOfCalculatedEffectiveMoneroAmount || false
 			if (hasAgreedToUsageGateTerms == false) {
 				// show alert… iff user agrees, write user has agreed to terms and proceed to branch, else bail
 				let title = `Important`
-				let message = `Though ${selected_ccySymbol} is selected, the app will send ${Currencies.ccySymbolsByCcy.XMR}. (This is not an exchange.)`
+				let message = `Though ${selected_ccySymbol} is selected, the app will send ${Currencies.ccySymbolsByCcy.XWP}. (This is not an exchange.)`
 				message += `\n\n`
 				message += `Rate providers include ${rateServiceDomainText}. Neither accuracy or favorability are guaranteed. Use at your own risk.`
-				let ok_buttonTitle = `Agree and Send ${final_XMR_amount_Number} ${Currencies.ccySymbolsByCcy.XMR}`
+				let ok_buttonTitle = `Agree and Send ${final_XMR_amount_Number} ${Currencies.ccySymbolsByCcy.XWP}`
 				let cancel_buttonTitle = "Cancel"
 				self.context.windowDialogs.PresentQuestionAlertDialogWith(
 					title, 
@@ -1539,7 +1539,7 @@ class SendFundsView extends View
 			} else {
 				// show alert… iff user agrees, write user has agreed to terms and proceed to branch, else bail
 				let title = `Confirm Amount`
-				let message = `Send ${final_XMR_amount_Number} ${Currencies.ccySymbolsByCcy.XMR}?`
+				let message = `Send ${final_XMR_amount_Number} ${Currencies.ccySymbolsByCcy.XWP}?`
 				let ok_buttonTitle = `Send`
 				let cancel_buttonTitle = "Cancel"
 				self.context.windowDialogs.PresentQuestionAlertDialogWith(

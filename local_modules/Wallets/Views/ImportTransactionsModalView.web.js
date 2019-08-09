@@ -549,7 +549,7 @@ class ImportTransactionsModalView extends View
 					}
 					const raw_formattedMoney = monero_amount_format_utils.formatMoney(import_fee__JSBigInt)
 					{
-						self.informationalHeaderLayer.innerHTML = `This requires a one-time import fee of ${raw_formattedMoney} XMR`
+						self.informationalHeaderLayer.innerHTML = `This requires a one-time import fee of ${raw_formattedMoney} XWP`
 						//
 						const tooltipText = `Importing your wallet means the server will scan the entire Swap blockchain for your wallet's past transactions, then stay up-to-date.<br/><br/>As this process places heavy load on the server, import is triggered by sending a fee (e.g. from the original wallet) with the specific payment ID below to the server at e.g. ${self.approximate_importOAAddress}.`
 						const view = commonComponents_tooltips.New_TooltipSpawningButtonView(tooltipText, self.context)
