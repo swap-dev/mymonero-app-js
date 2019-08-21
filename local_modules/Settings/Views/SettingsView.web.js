@@ -344,7 +344,7 @@ class SettingsView extends View
 			div.appendChild(labelLayer)
 			//
 			const valueLayer = commonComponents_forms.New_fieldValue_textInputLayer(self.context, {
-				placeholderText: "Leave blank to use wallet.xwp.one"
+				placeholderText: "Leave blank to use wallet.xwp.fyi/api"
 			})
 			valueLayer.autocomplete = "off"
 			valueLayer.autocorrect = "off"

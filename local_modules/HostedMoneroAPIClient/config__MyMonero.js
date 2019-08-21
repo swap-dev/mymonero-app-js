@@ -1,4 +1,4 @@
 module.exports = 
 {
-	API__authority: "wallet.xwp.one/api"
+	API__authority: "wallet.xwp.fyi/api"
 }
